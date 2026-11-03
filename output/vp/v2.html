@@ -1,11 +1,15 @@
 <html><head><meta charset="utf-8"><style>:root{--main:#1F3864;--tint:#EEF2F8;--light:#DCE3EE;--mid:#8EA3C4;--red:#C00000;--redt:#FBE9E9;--gray:#6B6B6B;--dark:#222}
 body{margin:0;word-break:keep-all;overflow-wrap:anywhere;font-family:'Malgun Gothic','Noto Sans CJK KR','Noto Sans KR',sans-serif;color:var(--dark)}
 #figure{box-sizing:border-box;background:#fff}
-#figure{display:grid;grid-template-columns:150px 30px 1fr 30px 170px;grid-template-rows:1fr 1fr;column-gap:0;row-gap:8px;padding:4px 4px;align-items:center}
+#figure{display:grid;grid-template-columns:140px 150px 1fr 30px 160px;grid-template-rows:1fr 1fr;column-gap:0;row-gap:8px;padding:4px 4px;align-items:center}
 .src{grid-row:1/3;background:var(--main);color:#fff;border-radius:10px;padding:10px 8px;text-align:center;font-size:17px;font-weight:bold;align-self:center}
 .src small{display:block;font-size:13.5px;font-weight:normal;opacity:.85;margin-top:4px}
 .ar{text-align:center;font-size:20px;color:var(--mid)}
 .ar.r{color:var(--red)}
+.ai{background:#fff;border:2px solid var(--red);border-radius:10px;margin:0 10px;padding:4px 6px;text-align:center;color:var(--red);font-weight:bold;font-size:14.5px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;position:relative}
+.hu{border-color:#AAA;color:var(--gray)} .hu:after{color:var(--mid)!important}
+.ai small{display:block;font-size:13.4px;font-weight:normal;color:var(--dark)}
+.ai:after{content:'▶';position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--red);font-size:16px}
 .path{border-radius:8px;padding:5px 12px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
 .p1{background:#F2F2F2;border:1.5px solid #BBB}
 .p2{background:var(--redt);border:1.5px solid var(--red)}
@@ -19,12 +23,12 @@ body{margin:0;word-break:keep-all;overflow-wrap:anywhere;font-family:'Malgun Got
 .out small{display:block;font-size:13.5px;font-weight:normal;margin-top:3px}
 </style></head><body><div id="figure">
 <div class="src">변경점<small>부품·회로·S/W<br>변경 내용</small></div>
-<div class="ar">▶</div>
+<div class="ai hu">담당자 경험<small>변경 부품과<br>해당 기능 위주</small></div>
 <div class="path p1"><b>직접 영향 — 사람이 주로 보는 길</b><div class="chips"><span class="chip">변경 부품 자체 성능</span><span class="chip">해당 기능 동작</span></div></div>
 <div class="ar">▶</div>
 <div class="out o1">기존 선정 시험<small>100%</small></div>
-<div class="ar r">▶</div>
-<div class="path p2"><b>연관 영향 — 에이전트가 더 찾는 길</b><div class="chips"><span class="chip">전원 공유</span><span class="chip">같은 기판 열</span><span class="chip">신호·노이즈</span><span class="chip">S/W 제어 연동</span><span class="chip">과거 유사 불량</span></div></div>
+<div class="ai">Claude AI 분석<small>설계 자료·과거<br>사례로 연결 추론</small></div>
+<div class="path p2"><b>연관 영향 — AI가 추론으로 더 찾는 길</b><div class="chips"><span class="chip">전원 공유</span><span class="chip">같은 기판 열</span><span class="chip">신호·노이즈</span><span class="chip">S/W 제어 연동</span><span class="chip">과거 유사 불량</span></div></div>
 <div class="ar r">▶</div>
 <div class="out o2">연관 시험<small>+10% 추가</small></div>
 </div></body></html>
