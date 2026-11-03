@@ -8,12 +8,12 @@ let r, a, b;
 // 1. 요약 [맞춤]
 r = S({ title: "전국 즉석떡볶이 맛집 10곳", message: "원조는 신당동 마복림(1953), 10곳 중 6곳이 서울에 집중",
   sub: "웹 검색(기사·맛집 플랫폼 소개글) 기준 선정 / 가격·영업시간은 방문 전 확인 필요", layout: "2-64",
-  boxes: [{ title: "위치 개념도", msg: "서울 6 · 인천·경기 2 · 영남 2" }, { title: "한 줄 추천", msg: "목적별로 고르면 3갈래" }],
+  boxes: [{ title: "맛집 위치", msg: "서울 6 · 인천·경기 2 · 영남 2" }, { title: "한 줄 추천", msg: "목적별로 고르면 3갈래" }],
   source: "※ 출처: 서울신문(1999.10.19), 매일신문(2011.12.17), 식신·폴레·핫플헌터 소개글 / 상세: 7장 비교표",
-  notes: "research.md 전체. 위치 개념도는 실제 좌표 기반, 해안선 단순화" });
+  notes: "research.md 전체. 지도: Natural Earth 1:10m 국가 경계(world-atlas), GSHHG/WDBII 하천(한강). 점 좌표는 동네·역 기준 근사" });
 a = r.boxes[0].inner;
 D.figureFit(pres, r.slide, { x: a.x, y: a.y, w: a.w, h: 3.6 }, path.join(W, "map.png"), "map");
-D.boxNote(r.slide, a, "※ 해안선·한강은 단순화한 개념도, 축척 무시");
+D.boxNote(r.slide, a, "※ 지도: Natural Earth 해안선, GSHHG 한강 / 점은 동네 단위 위치");
 D.cards(pres, r.slide, r.boxes[1].inner, [
   { tag: "원조", red: true, title: "마복림할머니떡볶이", big: "1953년 창업", body: "즉석떡볶이 개발자로 인정받는 집. 첫 방문 1순위" },
   { tag: "개성", title: "도레미 · 모꼬지에 · 작은공간", body: "춘장·짜장을 섞은 양념, 고추장 단독과 맛 차이 뚜렷" },
