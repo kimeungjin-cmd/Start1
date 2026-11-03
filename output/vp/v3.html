@@ -1,0 +1,25 @@
+<html><head><meta charset="utf-8"><style>:root{--main:#1F3864;--tint:#EEF2F8;--light:#DCE3EE;--mid:#8EA3C4;--red:#C00000;--redt:#FBE9E9;--gray:#6B6B6B;--dark:#222}
+body{margin:0;word-break:keep-all;overflow-wrap:anywhere;font-family:'Malgun Gothic','Noto Sans CJK KR','Noto Sans KR',sans-serif;color:var(--dark)}
+#figure{box-sizing:border-box;background:#fff}
+#figure{display:grid;grid-template-rows:1fr 30px;padding:4px 2px}
+.row{display:grid;grid-template-columns:1fr 22px 1fr 22px 1fr 22px 1fr;align-items:stretch}
+.n{border-radius:8px;padding:6px 6px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.n b{font-size:14.5px;display:block}
+.n span{font-size:13.4px;color:var(--gray);display:block;margin-top:2px}
+.n1{background:var(--tint)} .n1 b{color:var(--main)}
+.n2{background:var(--main)} .n2 b,.n2 span{color:#fff}
+.n3{background:var(--redt);border:1.5px solid var(--red)} .n3 b{color:var(--red)}
+.n4{background:var(--tint)} .n4 b{color:var(--main)}
+.a{display:flex;align-items:center;justify-content:center;color:var(--mid);font-size:15px}
+.back{position:relative;margin:0 12.5% 0 12.5%;border:2px solid var(--mid);border-top:none;border-radius:0 0 10px 10px;height:16px}
+.back:before{content:'▲';position:absolute;left:-8px;top:-12px;color:var(--mid);font-size:13px}
+.lbl{position:absolute;left:50%;top:6px;transform:translateX(-50%);background:#fff;padding:0 8px;font-size:13.4px;font-weight:bold;color:var(--main);white-space:nowrap}
+</style></head><body><div id="figure">
+<div class="row">
+ <div class="n n1"><b>현업 사용</b><span>담당자가<br>채택·기각 기록</span></div><div class="a">▶</div>
+ <div class="n n2"><b>판단 기준 보완</b><span>기각·누락 원인<br>기준·사례 DB 반영</span></div><div class="a">▶</div>
+ <div class="n n3"><b>기준 세트 재검증</b><span>40개 모델로<br>포함률 100% 확인</span></div><div class="a">▶</div>
+ <div class="n n4"><b>개선판 적용</b><span>채택률 추이로<br>효과 확인</span></div>
+</div>
+<div class="back"><span class="lbl">매월 반복</span></div>
+</div></body></html>
