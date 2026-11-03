@@ -1,0 +1,24 @@
+<html><head><meta charset="utf-8"><style>:root{--main:#1F3864;--tint:#EEF2F8;--light:#DCE3EE;--mid:#8EA3C4;--red:#C00000;--redt:#FBE9E9;--gray:#6B6B6B;--dark:#222}
+body{margin:0;word-break:keep-all;overflow-wrap:anywhere;font-family:'Malgun Gothic','Noto Sans CJK KR','Noto Sans KR',sans-serif; color:var(--dark)}
+#figure{box-sizing:border-box;background:#fff}
+#figure{position:relative;overflow:hidden}
+.sea{position:absolute;left:0;right:0;top:30%;bottom:0;background:linear-gradient(#DCE3EE,#C3CFE2)}
+.wl{position:absolute;left:0;right:0;top:30%;border-top:2px solid var(--mid)}
+.wlt{position:absolute;right:10px;top:calc(30% + 4px);font-size:13.5px;color:var(--main)}
+.ice{position:absolute;left:50%;transform:translateX(-50%);top:4%;width:46%;height:92%;background:#fff;clip-path:polygon(42% 0,58% 0,72% 30%,96% 62%,82% 100%,18% 100%,4% 62%,28% 30%);opacity:.95}
+.said{position:absolute;left:50%;transform:translateX(-50%);top:7%;text-align:center;font-size:16px;font-weight:bold;color:var(--dark);width:60%}
+.said small{display:block;font-size:13.5px;color:var(--gray);font-weight:normal}
+.hid{position:absolute;display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;left:6%;right:6%;top:40%}
+.hid div{background:rgba(255,255,255,.92);border-left:5px solid var(--main);border-radius:6px;padding:8px 10px;font-size:14.5px}
+.hid div b{display:block;color:var(--main);font-size:15px}
+.hid .r{border-left-color:var(--red)} .hid .r b{color:var(--red)}
+</style></head><body><div id="figure">
+<div class="sea"></div><div class="ice"></div><div class="wl"></div><div class="wlt">수면 아래 = 말하지 않은 기대</div>
+<div class="said"><small>말한 것</small>"그 건 어떻게 됐어?"</div>
+<div class="hid">
+ <div class="r"><b>위에 보고할 한 문장</b>"상무님께 뭐라고 말하면 되지?"</div>
+ <div><b>걱정하는 리스크</b>출하·일정·고객 영향이 있나</div>
+ <div><b>원하는 답의 형태</b>결론? 진척률? 결정 요청?</div>
+ <div class="r"><b>숨은 마감</b>오늘 오후 회의 전에 필요</div>
+</div>
+</div></body></html>

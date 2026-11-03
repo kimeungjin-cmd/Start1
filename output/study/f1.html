@@ -1,0 +1,31 @@
+<html><head><meta charset="utf-8"><style>:root{--main:#1F3864;--tint:#EEF2F8;--light:#DCE3EE;--mid:#8EA3C4;--red:#C00000;--redt:#FBE9E9;--gray:#6B6B6B;--dark:#222}
+body{margin:0;word-break:keep-all;overflow-wrap:anywhere;font-family:'Malgun Gothic','Noto Sans CJK KR','Noto Sans KR',sans-serif; color:var(--dark)}
+#figure{box-sizing:border-box;background:#fff}
+#figure{display:grid;grid-template-rows:auto 34px auto 30px auto;padding:6px 4px}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.sym{background:var(--tint);border-radius:8px;padding:10px 10px;text-align:center}
+.sym b{display:block;color:var(--main);font-size:17px;margin-bottom:4px}
+.sym span{font-size:14px;color:var(--dark);display:block;min-height:38px}
+.chip{display:inline-block;font-size:13px;font-weight:bold;padding:1px 7px;border-radius:10px;margin:4px 2px 0;color:#fff}
+.c1{background:var(--red)} .c2{background:var(--main)}
+.arrow{text-align:center;color:var(--mid);font-size:22px;line-height:34px}
+.roots{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.root{border-radius:8px;padding:10px 14px;color:#fff}
+.root b{font-size:15px;opacity:.9} .root div{font-size:18px;font-weight:bold;margin-top:2px}
+.r1{background:var(--red)} .r2{background:var(--main)}
+.common{border:2px dashed var(--mid);border-radius:8px;text-align:center;padding:8px;font-size:16px;font-weight:bold;color:var(--main)}
+</style></head><body><div id="figure">
+<div class="row">
+ <div class="sym"><b>이슈 결론</b><span>'추가 확인 중'으로<br>끝남</span><i class="chip c1">뿌리①</i></div>
+ <div class="sym"><b>회의 매듭</b><span>담당·기한 칸이<br>빈 채로 끝남</span><i class="chip c1">①</i><i class="chip c2">②</i></div>
+ <div class="sym"><b>보고·PR</b><span>한 일은 보이고<br>판단은 안 보임</span><i class="chip c1">①</i><i class="chip c2">②</i></div>
+ <div class="sym"><b>윗사람과 충돌</b><span>묻는 것과<br>답이 엇갈림</span><i class="chip c2">뿌리②</i></div>
+</div>
+<div class="arrow">▼ &nbsp;&nbsp; 증상 아래에 있는 것 &nbsp;&nbsp; ▼</div>
+<div class="roots">
+ <div class="root r1"><b>뿌리①  내 쪽</b><div>확인된 것만 말하는<br>품질 습관</div></div>
+ <div class="root r2"><b>뿌리②  상대 쪽</b><div>상대가 원하는 답을<br>먼저 확인하지 않음</div></div>
+</div>
+<div class="arrow">▼</div>
+<div class="common">공통점: 상대 기준에 맞춘 '내 판단 한 문장'이 빠져 있음</div>
+</div></body></html>
