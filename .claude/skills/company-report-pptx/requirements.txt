@@ -1,0 +1,8 @@
+python-pptx>=1.0
+pillow
+pdfplumber
+python-docx
+openpyxl
+playwright
+pymupdf
+pywin32; sys_platform == "win32"

@@ -1,0 +1,9 @@
+{
+  "name": "company-report-pptx",
+  "private": true,
+  "description": "회사 양식 보고서 PPT 스킬 — 처음 한 번 이 폴더에서 npm install",
+  "dependencies": {
+    "katex": "0.16.11",
+    "pptxgenjs": "4.0.1"
+  }
+}
