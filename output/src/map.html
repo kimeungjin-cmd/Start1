@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+:root{--main:#1F3864;--tint:#EEF2F8;--light:#DCE3EE;--mid:#8EA3C4;--gray:#6B6B6B;--dark:#222;--red:#C00000}
+body{margin:0;font-family:"Malgun Gothic","Noto Sans CJK KR",sans-serif;word-break:keep-all}
+#figure{width:658px;height:346px;display:grid;grid-template-columns:250px 1fr;gap:14px;box-sizing:border-box}
+.p{position:relative;border:1px solid var(--light);border-radius:8px;background:#fff}
+.h{position:absolute;left:10px;top:6px;font-size:14px;font-weight:700;color:var(--main)}
+svg{position:absolute;left:0;top:0}
+</style></head><body><div id="figure">
+<div class="p"><div class="h">전국</div><svg id="kr" width="250" height="346"></svg></div>
+<div class="p"><div class="h">서울 6곳 (도심 기준 상대 위치)</div><svg id="se" width="394" height="346"></svg></div>
+</div><script>
+const NS="http://www.w3.org/2000/svg";function el(p,t,a,txt){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;p.appendChild(e);return e}
+// 전국
+const kr=document.getElementById('kr');const k=Math.cos(36*Math.PI/180);
+const LON0=125.9,LON1=129.8,LAT0=34.1,LAT1=38.75;const sx=(250-20)/((LON1-LON0)*k),sy=(346-40)/(LAT1-LAT0),s=Math.min(sx,sy);
+const P=(lo,la)=>[10+(lo-LON0)*k*s,30+(LAT1-la)*s];
+const coast=[[126.6,37.75],[127.2,38.1],[128.3,38.6],[128.6,38.2],[129.0,37.7],[129.4,37.0],[129.45,36.0],[129.57,36.08],[129.3,35.4],[129.1,35.1],[128.6,34.9],[128.0,34.85],[127.6,34.65],[127.2,34.55],[126.6,34.3],[126.3,34.7],[126.4,35.1],[126.5,35.6],[126.7,36.0],[126.5,36.4],[126.2,36.8],[126.7,37.0],[126.6,37.4]];
+el(kr,'polygon',{points:coast.map(c=>P(...c).join(',')).join(' '),fill:'#EEF2F8',stroke:'#8EA3C4','stroke-width':1.2});
+const nat=[{n:'서울 6곳',lo:127.0,la:37.56,c:'#C00000',r:9,dx:14,dy:6},{n:'부평 북새통',lo:126.72,la:37.51,c:'#1F3864',r:6,dx:-8,dy:22,anchor:'start'},{n:'포천 태영분식',lo:127.2,la:37.89,c:'#1F3864',r:6,dx:10,dy:-8},{n:'대구 동성로떡볶이',lo:128.6,la:35.87,c:'#1F3864',r:6,dx:0,dy:-14,anchor:'middle'},{n:'부산 영도 도날드',lo:129.07,la:35.09,c:'#1F3864',r:6,dx:-12,dy:-10,anchor:'end'}];
+nat.forEach(d=>{const [x,y]=P(d.lo,d.la);el(kr,'circle',{cx:x,cy:y,r:d.r,fill:d.c,stroke:'#fff','stroke-width':2});
+ el(kr,'text',{x:x+d.dx,y:y+d.dy,'font-size':13.5,'font-weight':700,fill:'#222','text-anchor':d.anchor||'start'},d.n)});
+// 서울
+const se=document.getElementById('se');const L0=126.94,L1=127.14,A0=37.46,A1=37.68;const s2=Math.min((394-60)/((L1-L0)*k),(346-60)/(A1-A0));
+const Q=(lo,la)=>[40+(lo-L0)/(L1-L0)*(394-150),55+(A1-la)/(A1-A0)*(346-110)];
+// 한강 개략선
+const han=[[126.94,37.545],[126.98,37.52],[127.01,37.515],[127.04,37.525],[127.08,37.53],[127.11,37.535],[127.14,37.545]];
+el(se,'polyline',{points:han.map(c=>Q(...c).join(',')).join(' '),fill:'none',stroke:'#8EA3C4','stroke-width':6,'stroke-linecap':'round',opacity:.55});
+const [hx,hy]=Q(126.95,37.545);el(se,'text',{x:hx,y:hy+22,'font-size':12,fill:'#6B6B6B','text-anchor':'start'},'한강');
+const sp=[{n:'마복림할머니',sub:'중구 신당동 · 1953',lo:127.017,la:37.565,red:1,dx:12,dy:5},{n:'도레미분식',sub:'도봉구 쌍문동',lo:127.034,la:37.653,dx:12,dy:5},{n:'먹쉬돈나',sub:'종로구 삼청동',lo:126.982,la:37.585,dx:-12,dy:-8,anchor:'end'},{n:'애플하우스',sub:'동작구 이수역',lo:126.982,la:37.486,dx:12,dy:5},{n:'작은공간',sub:'강남구 도곡동',lo:127.06,la:37.488,dx:12,dy:5},{n:'모꼬지에',sub:'송파구 잠실',lo:127.115,la:37.505,dx:12,dy:5}];
+sp.forEach(d=>{const [x,y]=Q(d.lo,d.la);el(se,'circle',{cx:x,cy:y,r:7,fill:d.red?'#C00000':'#1F3864',stroke:'#fff','stroke-width':2});
+ el(se,'text',{x:x+d.dx,y:y+d.dy,'font-size':14,'font-weight':700,fill:'#222','text-anchor':d.anchor||'start'},d.n);
+ el(se,'text',{x:x+d.dx,y:y+d.dy+16,'font-size':12,fill:'#6B6B6B','text-anchor':d.anchor||'start'},d.sub)});
+</script></body></html>
