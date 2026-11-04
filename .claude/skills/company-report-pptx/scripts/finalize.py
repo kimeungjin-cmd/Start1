@@ -74,7 +74,7 @@ def main():
     n = len(Presentation(a.pptx).slides); tok = token(a.pptx)
     work = Path(a.pptx).resolve().parent; rdir = work / "render"; review = work / "review.md"
     print("== 자동 검사"); ok = True
-    for name in ["check_layout.py", "check_linebreak.py", "check_text.py", "check_richness.py"]:
+    for name in ["check_layout.py", "check_linebreak.py", "check_text.py", "check_richness.py", "check_a3.py"]:
         ok &= run([str(HERE / name), a.pptx])[0]
     if a.sources:
         ok &= run([str(HERE / "check_coverage.py"), a.pptx] + a.sources + (["--ignore"] + a.ignore if a.ignore else []))[0]

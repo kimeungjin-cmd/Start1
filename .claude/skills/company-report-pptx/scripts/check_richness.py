@@ -15,9 +15,9 @@ import sys, re, argparse
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
 EMU = 914400
-STRONG = {"bar", "line", "donut", "pie", "chart", "timeline", "flow", "matrix", "kpi", "table", "picture", "equation", "diagram", "photo", "map", "gantt", "calendar"}
+STRONG = {"a3", "bar", "line", "donut", "pie", "chart", "timeline", "flow", "matrix", "kpi", "table", "picture", "equation", "diagram", "photo", "map", "gantt", "calendar"}
 WEAK = {"cards", "rows", "checklist", "steps"}
-NAMES = {"bar": "막대", "line": "꺾은선", "donut": "도넛", "pie": "원형", "chart": "차트", "timeline": "타임라인", "flow": "단계 화살표", "matrix": "위치도",
+NAMES = {"a3": "A3 한 장", "bar": "막대", "line": "꺾은선", "donut": "도넛", "pie": "원형", "chart": "차트", "timeline": "타임라인", "flow": "단계 화살표", "matrix": "위치도",
          "kpi": "숫자 카드", "table": "표", "picture": "사진·그림", "equation": "수식", "cards": "카드", "rows": "행 목록", "checklist": "체크리스트", "steps": "단계 목록", "diagram": "도식", "annotate": "주석", "photo": "사진", "map": "지도·위치도", "gantt": "간트", "calendar": "달력"}
 
 def prst(sh):  # 도형 모양 이름(XML 원문) — python-pptx가 모르는 모양에서도 오류 없이

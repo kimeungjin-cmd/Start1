@@ -258,6 +258,63 @@ function annotate(pres, s, A, { px, py, text, dx = 0.6, dy = -0.6, w = 1.9, red 
   T(s, text, { x: bx + 0.08, y: by, w: w - 0.16, h, fontSize: 10, bold: true, color: col, valign: "middle" });
 }
 
+// ═════════ A3 모드 (PDCA 8칸 한 장) — references/a3-mode.md ═════════
+// 칸 이름은 고정(check_a3.py가 이 키로 검사). 빈칸은 숨기지 않고 빨간 점선 [확인 필요]로 드러낸다.
+const A3_KEYS = {
+  problem: "① 문제 정의", current: "② 현상 파악", goal: "③ 목표", cause: "④ 근본 원인",
+  action: "⑤ 대책", plan: "⑥ 실행 계획", check: "⑦ 효과 확인", standard: "⑧ 표준화·횡전개",
+};
+const A3_NEED = {
+  problem: "언제·어디서·몇 건·고객 영향", current: "현재 수준(숫자)과 기준", goal: "목표 수치 + 기한",
+  cause: "원인과 검증 여부([확인됨]/[추정])", action: "대책 내용(임시/영구 구분)", plan: "담당 + 기한",
+  check: "측정 지표 + 측정 일정", standard: "규격·체크리스트 반영, 타 모델 전개",
+};
+const A3_STATE = { done: ["완료", THEME.muted, "FFFFFF"], now: ["진행", THEME.main, "FFFFFF"], plan: ["계획", THEME.light, THEME.main], risk: ["리스크", THEME.red, "FFFFFF"] };
+// 박스 안 영역 A에 칸 여러 개를 세로로: sections=[{key, text, state, w, draw}]
+//  - text 없음/빈 문자열 → 빨간 점선 + "[확인 필요] 필요한 것"
+//  - w: 높이 비중(기본 1). draw:true면 글은 첫 줄만 쓰고 나머지 영역을 반환 → 차트·표를 그 안에 그린다
+// 반환: { key: 그림 영역 {x,y,w,h} } (draw:true인 칸만)
+function a3(pres, s, A, sections, { gap = 0.08, lw = 1.5 } = {}) {
+  _tag(s, "a3", A);
+  const tot = sections.reduce((a, x) => a + (x.w || 1), 0), avail = A.h - gap * (sections.length - 1), out = {};
+  let y = A.y;
+  sections.forEach(sec => {
+    if (!A3_KEYS[sec.key]) throw new Error(`A3 칸 이름 오류: ${sec.key} (가능: ${Object.keys(A3_KEYS).join(", ")})`);
+    const h = avail * (sec.w || 1) / tot, empty = !sec.text || !String(sec.text).trim();
+    const [stTxt, stBg, stFg] = empty ? ["미작성", THEME.red, "FFFFFF"] : (A3_STATE[sec.state] || ["", THEME.tint, THEME.main]);
+    // 라벨 띠
+    s.addShape(pres.shapes.RECTANGLE, { x: A.x, y, w: lw, h, fill: { color: THEME.tint }, line: { color: THEME.tint } });
+    T(s, A3_KEYS[sec.key], { x: A.x + 0.08, y: y + 0.06, w: lw - 0.12, h: 0.3, fontSize: 11, bold: true, color: THEME.main });
+    if (stTxt) pill(pres, s, A.x + 0.08, y + 0.4, 0.72, 0.24, stTxt, stFg, stBg);
+    // 내용
+    const cx = A.x + lw + 0.12, cw = A.w - lw - 0.12;
+    if (empty) {
+      s.addShape(pres.shapes.RECTANGLE, { x: cx, y: y + 0.03, w: cw, h: h - 0.06, fill: { color: THEME.redTint }, line: { color: THEME.red, width: 1, dashType: "dash" } });
+      T(s, `[확인 필요] ${sec.need || A3_NEED[sec.key]}`, { x: cx + 0.1, y, w: cw - 0.2, h, fontSize: 11, bold: true, color: THEME.red, valign: "middle", objectName: `a3:${sec.key}` });
+    } else if (sec.draw) {
+      const th = 0.08 + 0.2 * String(sec.text).split("\n").length;   // 줄 수만큼 글 높이 (11pt ≈ 0.2in/줄)
+      T(s, sec.text, { x: cx, y: y + 0.02, w: cw, h: th, fontSize: 11, color: THEME.dark, valign: "top", objectName: `a3:${sec.key}` });
+      out[sec.key] = { x: cx, y: y + th + 0.06, w: cw, h: h - th - 0.1 };
+      if (out[sec.key].h < 0.6) console.warn(`[A3] ${A3_KEYS[sec.key]} 그림 영역 ${out[sec.key].h.toFixed(2)}in — w를 키우거나 글을 줄일 것`);
+    } else {
+      T(s, sec.text, { x: cx, y: y + 0.02, w: cw, h: h - 0.04, fontSize: 11, color: THEME.dark, valign: "top", objectName: `a3:${sec.key}` });
+    }
+    if (y + h < A.y + A.h - 0.01) s.addShape(pres.shapes.LINE, { x: A.x, y: y + h + gap / 2, w: A.w, h: 0, line: { color: "E3E3E3", width: 0.5 } });
+    y += h + gap;
+  });
+  return out;
+}
+// A3 한 장 만들기: 왼쪽 박스 = Plan(①~④), 오른쪽 박스 = Do·Check·Act(⑤~⑧). 레이아웃 2-55 고정
+// opts: {title, message, sub, source, notes, planMsg, actMsg, plan:[①~④ 칸], act:[⑤~⑧ 칸]}
+function a3Slide(pres, o) {
+  const { slide: s, boxes } = slide(pres, { title: o.title, message: o.message, sub: o.sub, source: o.source, notes: o.notes, layout: "2-55",
+    boxes: [{ title: "Plan — 문제·원인", msg: o.planMsg }, { title: "Do·Check·Act — 대책·효과", msg: o.actMsg }] });
+  const keysL = ["problem", "current", "goal", "cause"], keysR = ["action", "plan", "check", "standard"];
+  const fill = (arr, keys) => keys.map(k => Object.assign({ key: k }, (arr || []).find(x => x.key === k) || {}));
+  const areas = Object.assign({}, a3(pres, s, boxes[0].inner, fill(o.plan, keysL)), a3(pres, s, boxes[1].inner, fill(o.act, keysR)));
+  return { slide: s, boxes, areas };
+}
+
 // HTML로 그린 그림(render_html.py 결과)·사진 넣기 + 시각 유형 표시. kind: flow|matrix|timeline|bar|line|donut|diagram|photo|map 등
 function figure(pres, s, A, path, sizePx, kind = "diagram", caption = null) {
   _tag(s, kind, A);
@@ -335,4 +392,4 @@ function photo(pres, s, area, path, sizePx, caption) {
   if (caption) T(s, caption, { x: area.x, y: y + h + 0.05, w: aw, h: 0.25, fontSize: 10, color: THEME.gray, align: "center" });
   return { x, y, w, h };
 }
-module.exports = { figureFit, annotate, figure, chartBar, chartLine, chartDonut, timeline, flow, matrix, equation, cards, rows, kpis, steps, checklist, table, splitV, splitH, save, cover, THEME, LAYOUTS, BUDGET, createDeck, slide, header, box, pill, boxNote, photo, T };
+module.exports = { a3, a3Slide, A3_KEYS, figureFit, annotate, figure, chartBar, chartLine, chartDonut, timeline, flow, matrix, equation, cards, rows, kpis, steps, checklist, table, splitV, splitH, save, cover, THEME, LAYOUTS, BUDGET, createDeck, slide, header, box, pill, boxNote, photo, T };
