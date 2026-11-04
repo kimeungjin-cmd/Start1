@@ -1,5 +1,5 @@
 # 장별 육안 검수 기록
-렌더링 토큰: 0ff2bfa5bd
+렌더링 토큰: b315fe7cd9
 
 finalize가 알려준 모아보기(todo-sheet-N.jpg) 또는 review/slide-XX.jpg를 한 번에 한 장씩 직접 열어 본 뒤 채운다. 빈칸·'TODO'가 있으면 통과하지 않는다.
 판정은 'OK' 또는 '수정 후 OK'. 수정했다면 PPT 재생성 → finalize 재실행(토큰이 바뀌므로 다시 검수).
@@ -57,6 +57,7 @@ finalize가 알려준 모아보기(todo-sheet-N.jpg) 또는 review/slide-XX.jpg�
 - 10초 질문: 운영은 누가, 얼마나?
 - 10초 답이 보이나: 예 — 순환 그림 + ③ 운영 월 30분
 - 판정: 수정 후 OK
+(이전 검수 유지 — 이미지 동일)
 
 ## 6장
 - 이미지 해시: c0351930e9c3
@@ -78,3 +79,4 @@ finalize가 알려준 모아보기(todo-sheet-N.jpg) 또는 review/slide-XX.jpg�
 - 10초 질문: 유지보수 부담은?
 - 10초 답이 보이나: 예 — 질문 7개 답변표
 - 판정: 수정 후 OK
+(이전 검수 유지 — 이미지 동일)
