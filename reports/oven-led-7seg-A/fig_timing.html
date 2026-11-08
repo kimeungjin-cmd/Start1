@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;font-family:"Malgun Gothic","맑은 고딕","Noto Sans CJK KR",sans-serif;word-break:keep-all}
+#figure{width:541px;height:341px}
+svg text{font-size:14.7px;fill:#222}
+</style></head><body><div id="figure"><svg id="s" width="541" height="341" viewBox="0 0 541 341"></svg></div>
+<script>
+const s=document.getElementById('s');let h='';
+const M='#1F3864',R='#C00000';
+function wave(y,segs,col){ // segs: [[x0,x1]] high intervals within 80..530
+  let d=`M80,${y}`;for(const [a,b] of segs){d+=` L${a},${y} L${a},${y-18} L${b},${y-18} L${b},${y}`;}d+=` L530,${y}`;
+  h+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="2.5"/>`;}
+function bus(c,xa,xb,label,col){h+=`<polygon points="${xa},${c} ${xa+6},${c-11} ${xb-6},${c-11} ${xb},${c} ${xb-6},${c+11} ${xa+6},${c+11}" fill="#EEF2F8" stroke="${col}" stroke-width="2"/><text x="${(xa+xb)/2}" y="${c+5}" text-anchor="middle" style="font-size:13.3px">${label}</text>`;}
+function panel(top,title,tc,com1,com2,sw,zone,zc,zl){
+  h+=`<rect x="${zone[0]}" y="${top+30}" width="${zone[1]-zone[0]}" height="128" fill="${zc}" opacity="0.16"/>`;
+  h+=`<text x="10" y="${top+20}" style="font-weight:bold;fill:${tc}">${title}</text>`;
+  h+=`<text x="${(zone[0]+zone[1])/2}" y="${top+20}" text-anchor="middle" style="font-weight:bold;fill:${zc}">${zl}</text>`;
+  [['자리1',top+62],['자리2',top+100],['세그']].forEach(([n,y],i)=>{const yy=i<2?y:top+136;h+=`<text x="10" y="${yy+(i<2?0:5)}" style="fill:#6B6B6B;font-size:13.3px">${n}</text>`;});
+  wave(top+62,[com1],M);wave(top+100,[com2],M);
+  bus(top+136,80,sw,'자리1 데이터',M);bus(top+136,sw,530,'자리2 데이터',M);}
+panel(5,'블랭킹이 없을 때',R,[80,300],[300,530],335,[300,335],R,'겹침 → 고스트');
+panel(178,'대책: 블랭킹 구간 삽입',M,[80,285],[325,530],305,[285,325],M,'블랭킹');
+s.innerHTML=h;
+</script></body></html>
